@@ -6,7 +6,7 @@ export default function Navbar() {
 
   return (
     <div className="px-4">
-    <nav className="relative bg-gradient-to-r from-blue-500 to-blue-400 p-4 rounded-full flex justify-between items-center shadow-lg">
+    <nav className="relative bg-[url('/asset/bg.png')] from-blue-500 to-blue-400 p-4 rounded-full flex justify-between items-center shadow-lg">
       {/* Logo */}
       <div className="flex items-center gap-2">
         <img src="/asset/logo.png" alt="Logo Bappeda" className="h-10" />

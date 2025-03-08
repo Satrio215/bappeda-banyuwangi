@@ -11,7 +11,8 @@ const Header = () => {
           Layanan Contact Center: <span className="font-bold">08.00 - 17.00 WIB</span>
         </p>
       </div>
-      <div className="border-b-4 border-blue-500"></div>
+      {/* Border biru dengan shadow */}
+      <div className="border-b-4 border-blue-500 shadow-lg"></div>
     </div>
   );
 };
