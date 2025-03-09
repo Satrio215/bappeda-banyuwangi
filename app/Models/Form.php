@@ -12,7 +12,7 @@ class Form extends Model
 
     protected $table = 'forms';
     protected $fillable = [
-        'no_tiket', 'klasifikasi', 'deskripsi', 'uraian', 'tanggal',
+        'no_tiket', 'klasifikasi', 'judul', 'uraian', 'tanggal',
         'lokasi', 'keterangan', 'file_bukti', 'nama', 'sex',
         'identitas', 'nomor', 'file_identitas', 'alamat', 'provinsi',
         'kota', 'no_telp', 'email', 'status'
@@ -21,9 +21,14 @@ class Form extends Model
     protected static function boot()
     {
         parent::boot();
+
         static::creating(function ($form) {
-            $randomStr = strtoupper(Str::random(8));
-            $form->no_tiket = 'TKT-' . date('Ymd') . '-' . $randomStr;
+            do {
+                $randomStr = strtoupper(Str::random(8));
+                $noTiket = 'TKT-' . now()->format('Ymd') . '-' . $randomStr;
+            } while (self::where('no_tiket', $noTiket)->exists());
+
+            $form->no_tiket = $noTiket;
         });
     }
 }

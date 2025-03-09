@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('no_tiket');
             $table->enum('klasifikasi',['infrastruktur', 'lingkungan', 'desa', 'pembangunan', 'umkm']);
-            $table->string('deskripsi');
+            $table->string('judul');
             $table->string('uraian');
             $table->date('tanggal');
             $table->string('lokasi');

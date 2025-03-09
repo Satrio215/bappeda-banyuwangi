@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Form;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FormController extends Controller
 {
@@ -12,7 +13,15 @@ class FormController extends Controller
      */
     public function index()
     {
-        //
+        $forms = Form::latest()->get()->map(function ($form){
+            $form->file_bukti = asset('images/' . $form->file_bukti);
+            $form->file_identitas = asset('images/' . $form->file_identitas);
+            return $form;
+        });
+
+        return inertia('Form/Index', [
+            'forms' => $forms,
+        ]);
     }
 
     /**
