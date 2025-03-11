@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/forms', [FormController::class, 'index'])->name('forms.index');
     Route::get('/forms/create', [FormController::class, 'create'])->name('forms.create');
-    Route::post('/forms', [ProfileController::class, 'store'])->name('forms.store');
+    Route::post('/forms', [FormController::class, 'store'])->name('forms.store');
 
 });
 

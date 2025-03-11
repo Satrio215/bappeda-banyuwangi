@@ -13,9 +13,10 @@ class FormController extends Controller
      */
     public function index()
     {
-        $forms = Form::latest()->get()->map(function ($form){
-            $form->file_bukti = asset('images/' . $form->file_bukti);
-            $form->file_identitas = asset('images/' . $form->file_identitas);
+        $forms = Form::latest()->get()->map(function ($form) {
+            // Pastikan tidak menambahkan 'images/' jika sudah ada dalam database
+            $form->file_bukti = asset('storage/' . ltrim($form->file_bukti, '/'));
+            $form->file_identitas = asset('storage/' . ltrim($form->file_identitas, '/'));
             return $form;
         });
 
@@ -23,6 +24,7 @@ class FormController extends Controller
             'forms' => $forms,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -46,35 +48,31 @@ class FormController extends Controller
             'keterangan' => 'required|string',
             'file_bukti' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'nama' => 'required|string',
-            'sex' => 'nullable|in:Laki-laki,Perempuan',
+            'sex' => 'nullable|in:pria,wanita',
             'identitas' => 'required|string',
-            'nomor' => 'required|string',
+            'nomor' => 'required|string|max:20',
             'file_identitas' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'alamat' => 'required|string',
             'provinsi' => 'nullable|string',
             'kota' => 'nullable|string',
             'no_telp' => 'nullable|string',
             'email' => 'required|email',
-            'status' => 'required|string',
+            'status' => 'nullable|string',
         ]);
 
         $form = new Form($request->except(['file_bukti', 'file_identitas']));
 
         if ($request->hasFile('file_bukti')) {
-            $filename = time() . '.' . $request->file('file_bukti')->getClientOriginalExtension();
-            $request->file('file_bukti')->move(public_path('images'), $filename);
-            $form->file_bukti = 'images/' . $filename;
+            $form->file_bukti = $request->file('file_bukti')->store('images', 'public');
         }
 
         if ($request->hasFile('file_identitas')) {
-            $filename = time() . '.' . $request->file('file_identitas')->getClientOriginalExtension();
-            $request->file('file_identitas')->move(public_path('images'), $filename);
-            $form->file_identitas = 'images/' . $filename;
+            $form->file_identitas = $request->file('file_identitas')->store('images', 'public');
         }
 
         $form->save();
 
-        return Redirect::route('forms.index')->with('success', 'Form berhasil disimpan!');
+        return redirect()->route('forms.index')->with('success', 'Form berhasil disimpan!');
     }
 
     /**

@@ -23,12 +23,12 @@ class Form extends Model
         parent::boot();
 
         static::creating(function ($form) {
-            do {
-                $randomStr = strtoupper(Str::random(8));
-                $noTiket = 'TKT-' . now()->format('Ymd') . '-' . $randomStr;
-            } while (self::where('no_tiket', $noTiket)->exists());
+            $randomStr = strtoupper(Str::uuid());
+            $form->no_tiket = 'TKT-' . now()->format('Ymd') . '-' . substr($randomStr, 0, 8);
 
-            $form->no_tiket = $noTiket;
+            if (empty($form->status)) {
+                $form->status = 'proses';
+            }
         });
     }
 }
