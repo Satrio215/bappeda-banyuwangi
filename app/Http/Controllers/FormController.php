@@ -29,7 +29,7 @@ class FormController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Form/Create');
     }
 
     /**
@@ -37,7 +37,44 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'klasifikasi' => 'required|string',
+            'judul' => 'required|string',
+            'uraian' => 'required|string',
+            'tanggal' => 'required|date',
+            'lokasi' => 'required|string',
+            'keterangan' => 'required|string',
+            'file_bukti' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'nama' => 'required|string',
+            'sex' => 'nullable|in:Laki-laki,Perempuan',
+            'identitas' => 'required|string',
+            'nomor' => 'required|string',
+            'file_identitas' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'alamat' => 'required|string',
+            'provinsi' => 'nullable|string',
+            'kota' => 'nullable|string',
+            'no_telp' => 'nullable|string',
+            'email' => 'required|email',
+            'status' => 'required|string',
+        ]);
+
+        $form = new Form($request->except(['file_bukti', 'file_identitas']));
+
+        if ($request->hasFile('file_bukti')) {
+            $filename = time() . '.' . $request->file('file_bukti')->getClientOriginalExtension();
+            $request->file('file_bukti')->move(public_path('images'), $filename);
+            $form->file_bukti = 'images/' . $filename;
+        }
+
+        if ($request->hasFile('file_identitas')) {
+            $filename = time() . '.' . $request->file('file_identitas')->getClientOriginalExtension();
+            $request->file('file_identitas')->move(public_path('images'), $filename);
+            $form->file_identitas = 'images/' . $filename;
+        }
+
+        $form->save();
+
+        return Redirect::route('forms.index')->with('success', 'Form berhasil disimpan!');
     }
 
     /**
