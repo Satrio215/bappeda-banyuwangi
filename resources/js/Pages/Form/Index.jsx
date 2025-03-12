@@ -45,6 +45,7 @@ export default function Index({ auth, forms }) {
                                     <thead className="bg-gray-50">
                                         <tr>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Judul</th>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No. Tiket</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Keterangan</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">File Bukti</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
@@ -55,6 +56,8 @@ export default function Index({ auth, forms }) {
                                         {forms.map((form) => (
                                             <tr key={form.id}>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{form.judul}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{form.no_tiket}</td>
+
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{form.keterangan}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                                     <img src={form.file_bukti} alt={form.judul} className="w-20 h-20 object-cover rounded-lg" />
@@ -65,12 +68,12 @@ export default function Index({ auth, forms }) {
                                                     </span>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                                    {/* <Link
+                                                    <Link
                                                         href={route('forms.edit', form.id)}
                                                         className="border border-blue-500 text-blue-500 px-3 py-1 rounded-lg hover:bg-blue-500 hover:text-white"
                                                     >
                                                         Edit
-                                                    </Link> */}
+                                                    </Link>
                                                     {/* <button
                                                         onClick={() => handleDelete(form.id)}
                                                         className="border border-red-500 text-red-500 px-3 py-1 rounded-lg hover:bg-red-500 hover:text-white"

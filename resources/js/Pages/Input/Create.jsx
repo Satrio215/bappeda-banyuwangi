@@ -1,0 +1,103 @@
+import { useState } from 'react';
+import { useForm } from '@inertiajs/react';
+
+export default function Create() {
+    const { data, setData, post, errors } = useForm({
+        klasifikasi: '',
+        judul: '',
+        uraian: '',
+        tanggal: '',
+        lokasi: '',
+        keterangan: '',
+        file_bukti: null,
+        nama: '',
+        sex: '',
+        identitas: '',
+        nomor: '',
+        file_identitas: null,
+        alamat: '',
+        provinsi: '',
+        kota: '',
+        no_telp: '',
+        email: '',
+        status: '',
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        post(route('inputs.store'));
+    };
+
+    return (
+        <div className="px-8 xl:px-16 ">
+            <div className="flex justify-center items-center mx-auto bg-[#097FF5] p-6 rounded-t-[50px] lg:rounded-t-[70px] border-4 border-[#097FF5] px-6 shadow-[4px_8px_20px_-5px_gray]">
+                <label className="text-xl lg:text-3xl font-bold font-saira text-center font text-white">Formulir Layanan Pengaduan</label>
+            </div>
+        <div className="mx-auto bg-white p-6 rounded-b-[50px] lg:rounded-b-[70px] border-4 border-[#097FF5] shadow-[4px_8px_20px_-5px_gray]">
+            {/* Pilih Klasifikasi */}
+            <div className="mt-4 border p-4 rounded-lg shadow-xl ">
+                <label className="block font-saira text-[#097FF5] font-bold text-xl lg:text-3xl">Pilih Klasifikasi Pengaduan</label>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2">
+                    {['Infrastruktur', 'Lingkungan', 'Pembangunan', 'Desa', 'UMKM'].map((item) => (
+                        <button
+                            type="button"
+                            key={item}
+                            className={`flex items-center py-2 px-4 border rounded-md text-sm font-medium w-full
+                                ${data.klasifikasi === item ? 'bg-orange-500 text-white border-orange-500' : 'bg-white border-gray-300'}`}
+                            onClick={() => setData('klasifikasi', item)}
+                        >
+                            <input
+                                type="checkbox"
+                                className="mr-2 accent-orange-500 rounded-full"
+                                checked={data.klasifikasi === item}
+                                readOnly
+                            />
+                            {item} {data.klasifikasi === item}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+
+            {/* Deskripsi Kejadian */}
+            <div className="mt-4 p-4 rounded-lg outline-dashed outline-[#097FF5] shadow-sm">
+                <label className="block font-saira text-[#097FF5] font-bold text-xl lg:text-3xl">Deskripsi Kejadian</label>
+                <input type="text" placeholder="Judul Pengaduan" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('judul', e.target.value)} />
+                <textarea placeholder="Uraian Pengaduan" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('uraian', e.target.value)}></textarea>
+                <input type="date" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('tanggal', e.target.value)} />
+                <input type="text" placeholder="Lokasi Kejadian" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('lokasi', e.target.value)} />
+            </div>
+
+            {/* Unggah Bukti */}
+            <div className="mt-4 p-4 rounded-lg outline-dashed outline-[#097FF5] shadow-sm">
+                <label className="block font-saira text-[#097FF5] font-bold text-xl lg:text-3xl">Unggah Bukti Pendukung</label>
+                <input type="file" className="w-full mt-2" onChange={(e) => setData('file_bukti', e.target.files[0])} />
+            </div>
+
+            {/* Data Pengadu */}
+            <div className="mt-4 p-4 rounded-lg outline-dashed outline-[#097FF5] shadow-sm">
+                <label className="block font-saira text-[#097FF5] font-bold text-xl lg:text-3xl">Data Pengadu</label>
+                <input type="text" placeholder="Nama Pelapor" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('nama', e.target.value)} />
+                <select className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('sex', e.target.value)}>
+                    <option value="">Pilih Jenis Kelamin</option>
+                    <option value="pria">Pria</option>
+                    <option value="wanita">Wanita</option>
+                </select>
+                <input type="text" placeholder="Tipe Identitas" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('identitas', e.target.value)} />
+                <input type="text" placeholder="Nomor Identitas" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('nomor', e.target.value)} />
+                <input type="file" className="w-full mt-2" onChange={(e) => setData('file_identitas', e.target.files[0])} />
+                <input type="text" placeholder="Alamat Domisili" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('alamat', e.target.value)} />
+                <input type="text" placeholder="Provinsi" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('provinsi', e.target.value)} />
+                <input type="text" placeholder="Kota" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('kota', e.target.value)} />
+                <input type="text" placeholder="Nomor Telepon" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('no_telp', e.target.value)} />
+                <input type="email" placeholder="Email Pelapor" className="w-full mt-2 p-2 border rounded-md" onChange={(e) => setData('email', e.target.value)} />
+            </div>
+
+            {/* Tombol Submit */}
+            <button onClick={handleSubmit} className="block mx-auto mt-4 bg-[#097FF5] text-white py-2 lg:py-3 px-9 lg:px-12 rounded-[20px] lg:rounded-[30px] hover:bg-blue-700">
+    Kirimkan Pengaduan
+</button>
+        </div>
+        </div>
+    );
+}

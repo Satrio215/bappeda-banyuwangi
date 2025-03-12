@@ -6,32 +6,22 @@ use App\Models\Form;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class FormController extends Controller
+class InputController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $forms = Form::latest()->get()->map(function ($form) {
-
-            $form->file_bukti = asset('storage/' . ltrim($form->file_bukti, '/'));
-            $form->file_identitas = asset('storage/' . ltrim($form->file_identitas, '/'));
-            return $form;
-        });
-
-        return inertia('Form/Index', [
-            'forms' => $forms,
-        ]);
+        //
     }
-
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return inertia('Form/Create');
+        return inertia('Input/Create');
     }
 
     /**
@@ -86,29 +76,17 @@ class FormController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Form $form)
     {
-        $form = Form::findOrFail($id);
-        return inertia('Form/Update', [
-            'form' => $form,
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Form $form)
     {
-        $request->validate([
-            'status' => 'required|string|in:proses,diterima,selesai',
-        ]);
-
-        $form = Form::findOrFail($id);
-        $form->update([
-            'status' => $request->status,
-        ]);
-
-        return redirect()->route('forms.index')->with('success', 'Status berhasil diperbarui!');
+        //
     }
 
     /**

@@ -4,15 +4,14 @@ const Header = () => {
   return (
     <div className="bg-white pb-4">
       <div className="container mx-auto px-4 py-2 text-center">
-        <p className="text-blue-600 text-xl sm:text-base font-bold">
-          Informasi Jam Layanan Pengaduan: <span className="font-bold">08.00 - 15.00 WIB</span>
+        <p className="text-[#097FF5] text-xl lg:text-3xl font-saira font-bold">
+          Informasi Jam Layanan Pengaduan : <span className="font-saira font-bold">08.00 - 15.00 WIB</span>
         </p>
-        <p className="text-blue-600 text-xl sm:text-base font-bold">
-          Layanan Contact Center: <span className="font-bold">08.00 - 17.00 WIB</span>
+        <p className="text-[#097FF5] text-xl lg:text-3xl font-saira font-bold">
+          Layanan Contact Center : <span className="font-saira font-bold">08.00 - 17.00 WIB</span>
         </p>
       </div>
-      {/* Border biru dengan shadow */}
-      <div className="border-b-4 border-blue-500 shadow-lg"></div>
+      <div className="border-b-8 border-[#097FF5] shadow-2xl"></div>
     </div>
   );
 };
