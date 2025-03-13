@@ -40,7 +40,7 @@ class InputController extends Controller
             'nama' => 'required|string',
             'sex' => 'nullable|in:pria,wanita',
             'identitas' => 'required|string',
-            'nomor' => ['required', 'string', 'regex:/^08[0-9]{8,18}$/'],
+            'nomor' => ['required', 'numeric', 'regex:/^[0-9]+$/'],
             'file_identitas' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'alamat' => 'required|string',
             'provinsi' => 'nullable|string',
@@ -62,7 +62,7 @@ class InputController extends Controller
 
         $form->save();
 
-        return redirect()->route('forms.index')->with('success', 'Form berhasil disimpan!');
+        return redirect()->route('forms.create')->with('success', 'Form berhasil disimpan!');
     }
 
     /**

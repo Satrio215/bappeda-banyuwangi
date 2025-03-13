@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "@inertiajs/react";
+import Swal from "sweetalert2";
 
 export default function Create() {
     const { data, setData, post, reset, errors } = useForm({
@@ -25,11 +26,18 @@ export default function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Pengiriman data form
         post(route("inputs.store"), {
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                Swal.fire({
+                    title: "Berhasil!",
+                    text: "Pengaduan Anda telah dikirim.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                });
+                reset();
+            },
             onError: (errors) => {
-                // Error akan tersimpan pada object errors
+                console.log(errors);
             },
         });
     };

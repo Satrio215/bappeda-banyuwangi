@@ -3,9 +3,6 @@ import Navbar from "@/components/Navbar";
 import Landing from "@/components/Landing";
 import Create from "@/Pages/Input/Create";
 
-
-
-
 const Welcome = () => {
   return (
     <div>
