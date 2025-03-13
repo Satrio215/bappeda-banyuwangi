@@ -13,7 +13,7 @@ export default function Create({ auth }) {
         keterangan: '',
         file_bukti: null,
         nama: '',
-        sex: '',
+        sex: null,
         identitas: '',
         nomor: '',
         file_identitas: null,
@@ -27,7 +27,6 @@ export default function Create({ auth }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(data); // Periksa data yang dikirim
 
         post(route('forms.store'), {
             onSuccess: () => reset(),
