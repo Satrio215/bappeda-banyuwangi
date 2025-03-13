@@ -40,7 +40,7 @@ class InputController extends Controller
             'nama' => 'required|string',
             'sex' => 'nullable|in:pria,wanita',
             'identitas' => 'required|string',
-            'nomor' => 'required|string|max:20',
+            'nomor' => ['required', 'string', 'regex:/^08[0-9]{8,18}$/'],
             'file_identitas' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'alamat' => 'required|string',
             'provinsi' => 'nullable|string',

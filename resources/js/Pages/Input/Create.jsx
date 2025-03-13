@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "@inertiajs/react";
 
 export default function Create() {
-    const { data, setData, post, errors } = useForm({
+    const { data, setData, post, reset, errors } = useForm({
         klasifikasi: "",
         judul: "",
         uraian: "",
@@ -25,14 +25,11 @@ export default function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Sending the form data using the post function from useForm
+        // Pengiriman data form
         post(route("inputs.store"), {
             onSuccess: () => reset(),
-
             onError: (errors) => {
-                // Set data error yang diterima dari backend
-                setData("errors", errors);
+                // Error akan tersimpan pada object errors
             },
         });
     };
@@ -78,10 +75,15 @@ export default function Create() {
                                             checked={data.klasifikasi === item}
                                             readOnly
                                         />
-                                        {item} {data.klasifikasi === item}
+                                        {item}
                                     </button>
                                 ))}
                             </div>
+                            {errors.klasifikasi && (
+                                <div className="text-red-500 text-sm mt-2">
+                                    {errors.klasifikasi}
+                                </div>
+                            )}
                         </div>
                     </div>
 
@@ -91,8 +93,7 @@ export default function Create() {
                             <span className="text-red-500 font-bold text-xl lg:text-2xl">
                                 *
                             </span>
-                            " wajib untuk diisi, pastikan data sudah diisi dengan
-                            benar
+                            " wajib untuk diisi, pastikan data sudah diisi dengan benar
                         </label>
                     </div>
 
@@ -110,6 +111,12 @@ export default function Create() {
                             value={data.judul}
                             onChange={(e) => setData("judul", e.target.value)}
                         />
+                        {errors.judul && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.judul}
+                            </div>
+                        )}
+
                         <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                             Uraian Pengaduan *
                         </label>
@@ -118,6 +125,12 @@ export default function Create() {
                             value={data.uraian}
                             onChange={(e) => setData("uraian", e.target.value)}
                         ></textarea>
+                        {errors.uraian && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.uraian}
+                            </div>
+                        )}
+
                         <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                             Tanggal Kejadian *
                         </label>
@@ -127,6 +140,12 @@ export default function Create() {
                             value={data.tanggal}
                             onChange={(e) => setData("tanggal", e.target.value)}
                         />
+                        {errors.tanggal && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.tanggal}
+                            </div>
+                        )}
+
                         <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                             Lokasi Kejadian *
                         </label>
@@ -136,6 +155,11 @@ export default function Create() {
                             value={data.lokasi}
                             onChange={(e) => setData("lokasi", e.target.value)}
                         />
+                        {errors.lokasi && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.lokasi}
+                            </div>
+                        )}
                     </div>
 
                     {/* Unggah Bukti */}
@@ -152,7 +176,12 @@ export default function Create() {
                             value={data.keterangan}
                             onChange={(e) => setData("keterangan", e.target.value)}
                         />
-                        {/* File Lampiran */}
+                        {errors.keterangan && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.keterangan}
+                            </div>
+                        )}
+
                         <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4 pb-2">
                             File Lampiran *
                         </label>
@@ -171,17 +200,20 @@ export default function Create() {
                                 {data.file_bukti ? data.file_bukti.name : ""}
                             </span>
                         </div>
+                        {errors.file_bukti && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.file_bukti}
+                            </div>
+                        )}
                     </div>
 
                     {/* Data Pengadu */}
                     <div className="mt-4 p-6 rounded-lg outline-dashed outline-[#097FF5] shadow-sm">
-                        {/* Judul */}
                         <label className="block font-saira text-[#097FF5] font-bold text-xl lg:text-3xl mb-4">
                             Data Pengadu
                         </label>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
-                            {/* Nama Pelapor */}
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-4 lg:pt-6">
                                 Nama Pelapor *
                             </label>
@@ -192,8 +224,12 @@ export default function Create() {
                                 onChange={(e) => setData("nama", e.target.value)}
                             />
                         </div>
+                        {errors.nama && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.nama}
+                            </div>
+                        )}
 
-                        {/* Jenis Kelamin */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 Jenis Kelamin
@@ -225,8 +261,12 @@ export default function Create() {
                                 </label>
                             </div>
                         </div>
+                        {errors.sex && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.sex}
+                            </div>
+                        )}
 
-                        {/* Tipe Identitas */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 Tipe Identitas *
@@ -243,8 +283,12 @@ export default function Create() {
                                 <option value="KTP">KTP</option>
                             </select>
                         </div>
+                        {errors.identitas && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.identitas}
+                            </div>
+                        )}
 
-                        {/* Nomor Identitas */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 Nomor Identitas *
@@ -256,8 +300,12 @@ export default function Create() {
                                 onChange={(e) => setData("nomor", e.target.value)}
                             />
                         </div>
+                        {errors.nomor && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.nomor}
+                            </div>
+                        )}
 
-                        {/* Unggah Identitas */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 Unggah Identitas Pelapor *
@@ -283,8 +331,12 @@ export default function Create() {
                                 </span>
                             </div>
                         </div>
+                        {errors.file_identitas && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.file_identitas}
+                            </div>
+                        )}
 
-                        {/* Alamat Domisili */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 Alamat Domisili *
@@ -296,8 +348,12 @@ export default function Create() {
                                 onChange={(e) => setData("alamat", e.target.value)}
                             />
                         </div>
+                        {errors.alamat && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.alamat}
+                            </div>
+                        )}
 
-                        {/* Provinsi */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 Provinsi
@@ -311,8 +367,12 @@ export default function Create() {
                                 }
                             />
                         </div>
+                        {errors.provinsi && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.provinsi}
+                            </div>
+                        )}
 
-                        {/* Kota */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 Kota
@@ -324,8 +384,12 @@ export default function Create() {
                                 onChange={(e) => setData("kota", e.target.value)}
                             />
                         </div>
+                        {errors.kota && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.kota}
+                            </div>
+                        )}
 
-                        {/* Nomor Telepon */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 No Telepon/Ponsel Pelapor
@@ -337,8 +401,12 @@ export default function Create() {
                                 onChange={(e) => setData("no_telp", e.target.value)}
                             />
                         </div>
+                        {errors.no_telp && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.no_telp}
+                            </div>
+                        )}
 
-                        {/* Email */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
                                 Email Pelapor *
@@ -350,6 +418,11 @@ export default function Create() {
                                 onChange={(e) => setData("email", e.target.value)}
                             />
                         </div>
+                        {errors.email && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.email}
+                            </div>
+                        )}
                     </div>
 
                     {/* Tombol Submit */}
