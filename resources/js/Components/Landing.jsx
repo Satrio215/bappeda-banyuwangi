@@ -2,7 +2,7 @@ import React from "react";
 
 const Landing = () => {
   return (
-    <div className="px-8 xl:px-16">
+    <div className="px-2 md:px-8 xl:px-16">
     <div className="flex flex-col lg:flex-row items-center justify-between bg-[url('/asset/layanan.png')] bg-cover rounded-[50px] xl:rounded-[70px] p-6 lg:p-10 px-6 lg:px-10 shadow-lg mx-auto my-10">
       <div className="w-full lg:w-1/2">
         <img

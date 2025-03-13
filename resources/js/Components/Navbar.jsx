@@ -5,7 +5,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="px-8 xl:px-16">
+    <div className="px-2 md:px-8 xl:px-16">
     <nav className="relative bg-[url('/asset/bg.png')] from-blue-500 to-blue-400 p-4 rounded-full flex justify-between items-center shadow-lg">
       {/* Logo */}
       <div className="flex items-center gap-2">
