@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'penggunas' => [
+            'driver' => 'session',
+            'provider' => 'penggunas',
+        ],
+
     ],
 
     /*
@@ -65,8 +70,8 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
         'penggunas' => [
-            'driver' => 'session',
-            'provider' => 'penggunas',
+            'driver' => 'eloquent',
+            'model' => App\Models\Pengguna::class, // Pastikan model ini ada
         ],
 
         // 'users' => [
@@ -100,10 +105,6 @@ return [
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
-        ],
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Pengguna::class,
         ],
     ],
 

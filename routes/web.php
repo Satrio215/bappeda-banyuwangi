@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Auth\PenggunaAuthController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\ProfileController;
@@ -25,6 +26,9 @@ Route::get('/register-pengguna', function () {
 })->name('register');
 
 Route::post('/register-pengguna', [PenggunaRegisterController::class, 'store']);
+Route::get('/login-pengguna', [PenggunaAuthController::class, 'showLoginForm'])->name('pengguna.login');
+Route::post('/login-pengguna', [PenggunaAuthController::class, 'login']);
+Route::post('/logout-pengguna', [PenggunaAuthController::class, 'logout'])->name('pengguna.logout');
 
 
 
