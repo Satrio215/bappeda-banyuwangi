@@ -3,25 +3,21 @@ import { router } from "@inertiajs/react";
 
 export default function Cari({ statusResponse }) {
   const [ticketNumber, setTicketNumber] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [status, setStatus] = useState(statusResponse || null);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
-    if (!ticketNumber || !phoneNumber) {
-      alert("Harap isi No Tiket dan No Telepon.");
+    if (!ticketNumber) {
+      alert("Harap isi No Tiket.");
       return;
     }
 
-    router.get(route("cari.tiket"),
-      { no_tiket: ticketNumber, no_telp: phoneNumber },
-      {
-        onSuccess: (page) => {
-          setStatus(page.props.status);
-        },
-      }
-    );
+    router.get(route("cari.tiket"), { no_tiket: ticketNumber }, {
+      onSuccess: (page) => {
+        setStatus(page.props.status);
+      },
+    });
   };
 
   return (
@@ -44,21 +40,13 @@ export default function Cari({ statusResponse }) {
             onSubmit={handleSearch}
             className="flex flex-col md:flex-row items-center gap-2 md:gap-4 w-full justify-center"
           >
-            {/* Input No Telepon */}
-            <input
-              type="text"
-              placeholder="No Telepon Pengadu"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="bg-white text-gray-600 p-3 rounded-full w-full max-w-[300px] md:max-w-none flex-1 focus:outline-none font-saira"
-            />
             {/* Input No Tiket */}
             <input
               type="text"
               placeholder="No Urut Tiket Pengadu"
               value={ticketNumber}
               onChange={(e) => setTicketNumber(e.target.value)}
-              className="bg-white text-gray-600 p-3 rounded-full w-full max-w-[300px] md:max-w-none flex-1 focus:outline-none font-saira"
+              className="bg-white text-gray-600 p-3 rounded-full w-full max-w-[100px] md:max-w-none flex-1 focus:outline-none font-saira"
             />
 
             {/* Tombol Periksa */}

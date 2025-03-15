@@ -1,8 +1,8 @@
 <?php
-
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PenggunaRegisterController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,6 +19,13 @@ Route::get('/', function () {
 Route::get('/status', function () {
     return Inertia::render('Status');
 })->name('status');
+
+Route::get('/register-pengguna', function () {
+    return Inertia::render('Auth/RegisterPengguna');
+})->name('register');
+
+Route::post('/register-pengguna', [PenggunaRegisterController::class, 'store']);
+
 
 
 Route::get('/dashboard', function () {

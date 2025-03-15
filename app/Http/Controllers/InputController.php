@@ -53,6 +53,8 @@ class InputController extends Controller
 
         $form = new Form($request->except(['file_bukti', 'file_identitas']));
 
+        $form->no_tiket = 'TIKET-' . time();
+
         if ($request->hasFile('file_bukti')) {
             $form->file_bukti = $request->file('file_bukti')->store('images', 'public');
         }
@@ -67,7 +69,7 @@ class InputController extends Controller
             'success' => 'Form berhasil disimpan!',
             'no_tiket' => $form->no_tiket
         ]);
-        }
+    }
 
     /**
      * Display the specified resource.
@@ -94,6 +96,7 @@ class InputController extends Controller
             'status' => $status,
         ]);
     }
+
     /**
      * Show the form for editing the specified resource.
      */

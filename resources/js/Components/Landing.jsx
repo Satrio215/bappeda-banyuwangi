@@ -1,4 +1,5 @@
 import React from "react";
+import { router } from "@inertiajs/react";
 
 const Landing = () => {
   return (
@@ -19,9 +20,24 @@ const Landing = () => {
         <p className="text-md lg:text-xl mb-6 font-saira">
           Kantor Badan Perencanaan Pembangunan Daerah (BAPPEDA) Kabupaten Banyuwangi
         </p>
-        <button type="button" className="bg-white text-blue-600 font-bold py-1 lg:py-3 px-10 lg:px-12 rounded-full shadow-md hover:bg-gray-200 transition font-saira text-md xl:text-xl">
-            Laporkan Pengaduan
-        </button>
+        <button
+  type="button"
+  onClick={() =>
+    router.visit(route("beranda"), {
+      onSuccess: () => {
+        setTimeout(() => {
+          const element = document.getElementById("create-section");
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 500); // Delay agar halaman termuat dulu
+      },
+    })
+  }
+  className="bg-white text-blue-600 font-bold py-1 lg:py-3 px-10 lg:px-12 rounded-full shadow-md hover:bg-gray-200 transition font-saira text-md xl:text-xl"
+>
+  Laporkan Pengaduan
+</button>
       </div>
     </div>
     </div>
