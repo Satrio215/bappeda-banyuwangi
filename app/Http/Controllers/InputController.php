@@ -13,7 +13,7 @@ class InputController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -30,6 +30,7 @@ class InputController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'no_tiket' => 'nullable',
             'klasifikasi' => 'required|string',
             'judul' => 'required|string',
             'uraian' => 'required|string',
@@ -45,7 +46,7 @@ class InputController extends Controller
             'alamat' => 'required|string',
             'provinsi' => 'nullable|string',
             'kota' => 'nullable|string',
-            'no_telp' => 'nullable|string',
+            'no_telp' => ['nullable', 'regex:/^08[0-9]{8,11}$/'],
             'email' => 'required|email',
             'status' => 'nullable|string',
         ]);
@@ -62,17 +63,37 @@ class InputController extends Controller
 
         $form->save();
 
-        return redirect()->route('forms.create')->with('success', 'Form berhasil disimpan!');
-    }
+        return redirect()->route('beranda')->with([
+            'success' => 'Form berhasil disimpan!',
+            'no_tiket' => $form->no_tiket
+        ]);
+        }
 
     /**
      * Display the specified resource.
      */
-    public function show(Form $form)
+    public function show(Request $request)
     {
-        //
-    }
+        $no_tiket = $request->input('no_tiket');
+        $no_telp = $request->input('no_telp');
+        $status = 'Tiket tidak ditemukan';
 
+        if ($no_tiket && $no_telp) {
+            $form = Form::where('no_tiket', $no_tiket)
+                        ->where('no_telp', $no_telp)
+                        ->first();
+
+            if ($form) {
+                $status = $form->status;
+            }
+        }
+
+        return inertia('Input/Cari', [
+            'no_tiket' => $no_tiket,
+            'no_telp' => $no_telp,
+            'status' => $status,
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      */

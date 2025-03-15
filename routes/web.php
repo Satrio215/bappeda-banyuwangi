@@ -9,12 +9,17 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
+        // 'canLogin' => Route::has('login'),
+        // 'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('beranda');
+
+Route::get('/status', function () {
+    return Inertia::render('Status');
+})->name('status');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -23,6 +28,8 @@ Route::get('/dashboard', function () {
 // Inputs Routes
 Route::get('/inputs/create', [InputController::class, 'create'])->name('inputs.create');
 Route::post('/inputs', [InputController::class, 'store'])->name('inputs.store');
+
+Route::get('/cari-tiket', [InputController::class, 'show'])->name('cari.tiket');
 
 Route::middleware('auth')->group(function () {
     // Profile Routes

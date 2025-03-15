@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 
 export default function Create() {
     const { data, setData, post, reset, errors } = useForm({
+        no_tiket: "",
         klasifikasi: "",
         judul: "",
         uraian: "",
@@ -26,21 +27,34 @@ export default function Create() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         post(route("inputs.store"), {
-            onSuccess: () => {
+            onSuccess: ({ props }) => {
+                const { success, no_tiket } = props; // Mengambil dari props Inertia.js
+
                 Swal.fire({
-                    title: "Berhasil!",
-                    text: "Pengaduan Anda telah dikirim.",
+                    title: `Berhasil! ${no_tiket}`,
+                    text: no_tiket
+                        ? `${success}\nNo Tiket: ${no_tiket}`
+                        : success,
                     icon: "success",
                     confirmButtonText: "OK",
                 });
+
                 reset();
             },
             onError: (errors) => {
                 console.log(errors);
+                Swal.fire({
+                    title: "Gagal!",
+                    text: "Terjadi kesalahan saat mengirim formulir.",
+                    icon: "error",
+                    confirmButtonText: "Coba Lagi",
+                });
             },
         });
     };
+
 
     return (
         <div className="px-2 md:px-8 xl:px-16 ">
@@ -213,6 +227,11 @@ export default function Create() {
                                 {errors.file_bukti}
                             </div>
                         )}
+                        <div>
+                            <label className="block font-saira font-light text-sm lg:text-lg pt-2 lg:pt-4 pb-2">
+                            maksimum 2Mb (JPEG, JPG, PNG, PDF, MP4, MPEG, 3GP, AVI, MP3, MAV, WMA)
+                            </label>
+                        </div>
                     </div>
 
                     {/* Data Pengadu */}

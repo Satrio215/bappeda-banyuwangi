@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@inertiajs/react";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
@@ -14,9 +15,9 @@ export default function Navbar() {
 
       {/* Menu untuk layar besar */}
       <div className="hidden md:flex space-x-6 text-white font-medium">
-        <a href="#" className="hover:font-semibold">Beranda</a>
+        <Link href={route("beranda")} className="hover:font-semibold">Beranda</Link>
         <a href="#" className="hover:font-semibold">Tata Cara Pengaduan</a>
-        <a href="#" className="hover:font-semibold">Cek Status</a>
+        <Link href={route("status")} className="hover:font-semibold">Cek Status</Link>
       </div>
 
       {/* Profil User untuk layar besar */}
