@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link } from "@inertiajs/react";
 import { Menu, X } from "lucide-react";
+import { usePage } from "@inertiajs/react";
 import Dropdown from "./Dropdown";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
 
-export default function Navbar({ user }) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Navbar() {
+    const user = usePage().props.user;
+    console.log( user );
+    const [isOpen, setIsOpen] = useState(false);
+
 
   return (
     <div className="px-2 md:px-8 xl:px-16">

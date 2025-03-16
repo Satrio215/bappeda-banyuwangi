@@ -8,14 +8,16 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        // 'canLogin' => Route::has('login'),
-        // 'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-})->name('beranda');
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         // 'canLogin' => Route::has('login'),
+//         // 'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// })->name('beranda');
+
+Route::get('/', [PenggunaAuthController::class,'welcome'])->name('beranda');
 
 Route::get('/status', function () {
     return Inertia::render('Status');
@@ -29,7 +31,6 @@ Route::post('/register-pengguna', [PenggunaRegisterController::class, 'store']);
 Route::get('/login-pengguna', [PenggunaAuthController::class, 'showLoginForm'])->name('pengguna.login');
 Route::post('/login-pengguna', [PenggunaAuthController::class, 'login']);
 Route::post('/logout-pengguna', [PenggunaAuthController::class, 'logout'])->name('pengguna.logout');
-
 
 
 Route::get('/dashboard', function () {

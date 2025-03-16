@@ -16,9 +16,18 @@ class PenggunaAuthController extends Controller
      */
     public function showLoginForm()
     {
-        return Inertia::render('Auth/LoginPengguna');
+        return Inertia::render('Auth/LoginPengguna', [
+            'user' => Auth::guard('penggunas')->user(),
+
+        ]);
     }
 
+    public function welcome()
+    {
+        return Inertia::render('Welcome', [
+            'user' => Auth::guard('penggunas')->user(),
+        ]);
+    }
     /**
      * Proses login untuk pengguna.
      */
@@ -29,15 +38,16 @@ class PenggunaAuthController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        $pengguna = Pengguna::where('email', $validated['email'])->first();
+        $credentials = $request->only('email', 'password');
 
-        if ($pengguna && Hash::check($validated['password'], $pengguna->password)) {
-            Auth::guard('penggunas')->login($pengguna);
-
-            return redirect()->route('beranda')->with('success', 'Login berhasil!');
+        if (Auth::guard('penggunas')->attempt($credentials)) {
+            return redirect()->intended('/');
         }
 
-        return back()->withErrors(['email' => 'The provided credentials are incorrect.']);
+        return Inertia::render('Welcome', [
+            'errors' => ['message' => 'Invalid credentials provided'],
+            'user' => Auth::guard('penggunas')->user(),
+        ]);
     }
 
     /**
@@ -54,11 +64,11 @@ class PenggunaAuthController extends Controller
      * Menampilkan dashboard pengguna.
      */
     public function dashboard()
-    {
-        $pengguna = auth()->guard('penggunas')->user();
+{
+    $pengguna = auth()->user();
 
-        return Inertia::render('Welcome', [
-            'pengguna' => $pengguna
-        ]);
-    }
+    return Inertia::render('Welcome', [
+        'user' => Auth::guard('penggunas')->user(),
+    ]);
+}
 }
