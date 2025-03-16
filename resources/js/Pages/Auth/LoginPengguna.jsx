@@ -32,7 +32,7 @@ export default function LoginPengguna() {
                     </h2>
                     <form onSubmit={handleSubmit} className="flex flex-col items-center">
                         {[
-                            { label: "Email/No. KTP", type: "email", name: "email", placeholder: "Masukkan email" },
+                            { label: "Email", type: "email", name: "email", placeholder: "Masukkan email" },
                             { label: "Password", type: "password", name: "password", placeholder: "Masukkan password" },
                         ].map((field) => (
                             <div className="mb-4 w-full" key={field.name}>

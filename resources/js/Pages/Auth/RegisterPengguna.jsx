@@ -30,7 +30,7 @@ export default function RegisterPengguna() {
                     <h2 className="text-2xl lg:text-4xl font-extrabold font-saira text-center text-[#097FF5] mb-6">Register</h2>
                     <form onSubmit={handleSubmit} className="flex flex-col items-center">
                         {[
-                            { label: "Email/No. KTP", type: "email", name: "email", placeholder: "Masukkan email" },
+                            { label: "Email", type: "email", name: "email", placeholder: "Masukkan email" },
                             { label: "Password", type: "password", name: "password", placeholder: "Masukkan password" },
                             { label: "Konfirmasi Password", type: "password", name: "password_confirmation", placeholder: "Ulangi password" },
                             { label: "NIK", type: "text", name: "nik", placeholder: "Masukkan NIK" },

@@ -5,15 +5,13 @@ export default function Syarat() {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    // Cek apakah modal sudah pernah ditutup sebelumnya
-    const hasAccepted = localStorage.getItem("syaratAccepted");
-    if (hasAccepted) {
-      setOpen(false);
-    }
+    // Reset localStorage setiap kali halaman di-refresh
+    localStorage.removeItem("syaratAccepted");
+    setOpen(true);
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem("syaratAccepted", "true"); // Simpan status modal
+    localStorage.setItem("syaratAccepted", "true");
     setOpen(false);
   };
 
