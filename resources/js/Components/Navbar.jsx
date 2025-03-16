@@ -30,7 +30,7 @@ export default function Navbar() {
                 </div>
 
                 {/* Profil User & Dropdown untuk layar besar */}
-                <div className="hidden lg:flex gap-4 items-center relative">
+                <div className="hidden lg:flex gap-4 items-center relative px-4">
                     {user ? (
                         <div className="relative">
                             <button
@@ -53,12 +53,12 @@ export default function Navbar() {
                     ) : (
                         <>
                             <Link href="/login-pengguna">
-                                <SecondaryButton className="font-bold bg-transparent text-white hover:bg-normal-blue-active">
+                            <SecondaryButton className="font-bold bg-white text-blue-500 border border-white hover:bg-[#097FF5] hover:text-white">
                                     Log In
                                 </SecondaryButton>
                             </Link>
                             <Link href="/register-pengguna">
-                                <PrimaryButton className="font-bold bg-normal-blue-active hover:bg-transparent hover:border-normal-blue-active">
+                                <PrimaryButton className="font-bold bg-black text-white border border-black hover:bg-white hover:border-black hover:text-black">
                                     Register
                                 </PrimaryButton>
                             </Link>
