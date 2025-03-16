@@ -15,12 +15,14 @@ class PenggunaRegisterController extends Controller
         $request->validate([
             'email' => 'required|email|unique:penggunas,email',
             'password' => 'required|min:6|confirmed',
+            'name' => 'required',
             'nik' => 'required|min:16|max:16',
         ]);
 
         Pengguna::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'name' => $request->name,
             'nik' => $request->nik,
         ]);
 

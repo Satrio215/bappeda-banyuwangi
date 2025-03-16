@@ -15,6 +15,7 @@ class Pengguna extends Model implements \Illuminate\Contracts\Auth\Authenticatab
     protected  $fillable = [
         'email',
         'password',
+        'name',
         'nik'
     ];
 

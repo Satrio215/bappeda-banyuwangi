@@ -47,7 +47,7 @@ class PenggunaAuthController extends Controller
     {
         Auth::guard('penggunas')->logout();
 
-        return redirect()->route('pengguna.login')->with('success', 'Logout berhasil!');
+        return redirect()->route('beranda')->with('success', 'Logout berhasil!');
     }
 
     /**

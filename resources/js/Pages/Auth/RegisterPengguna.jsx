@@ -5,6 +5,7 @@ export default function RegisterPengguna() {
         email: "",
         password: "",
         password_confirmation: "",
+        name: "",
         nik: "",
     });
 
@@ -33,6 +34,7 @@ export default function RegisterPengguna() {
                             { label: "Email", type: "email", name: "email", placeholder: "Masukkan email" },
                             { label: "Password", type: "password", name: "password", placeholder: "Masukkan password" },
                             { label: "Konfirmasi Password", type: "password", name: "password_confirmation", placeholder: "Ulangi password" },
+                            { label: "Nama", type: "text", name: "name", placeholder: "Masukkan Nama Lenkap" },
                             { label: "NIK", type: "text", name: "nik", placeholder: "Masukkan NIK" },
                         ].map((field) => (
                             <div className="mb-4 w-full" key={field.name}>
