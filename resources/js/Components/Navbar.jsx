@@ -22,8 +22,8 @@ export default function Navbar() {
                     <img src="/asset/logo.png" alt="Logo Bappeda" className="h-10" />
                 </div>
 
-                {/* Menu untuk layar besar */}
-                <div className="hidden md:flex space-x-6 text-white font-medium">
+                {/* Menu untuk layar besar (hanya lg ke atas) */}
+                <div className="hidden lg:flex space-x-6 text-white font-medium">
                     <Link href={route("beranda")} className="hover:font-semibold">Beranda</Link>
                     <a href="#" className="hover:font-semibold">Tata Cara Pengaduan</a>
                     <Link href={route("status")} className="hover:font-semibold">Cek Status</Link>
@@ -66,16 +66,16 @@ export default function Navbar() {
                     )}
                 </div>
 
-                {/* Menu untuk layar kecil */}
-                <div className="md:hidden">
+                {/* Menu untuk layar kecil dan md (burger menu tetap muncul) */}
+                <div className="lg:hidden">
                     <button onClick={() => setIsOpen(!isOpen)} className="text-white">
                         {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                     </button>
                 </div>
 
-                {/* Dropdown menu untuk layar kecil */}
+                {/* Dropdown menu untuk layar sm dan md */}
                 {isOpen && (
-                    <div className="absolute top-16 right-4 bg-white shadow-lg rounded-lg w-48 py-2 flex flex-col md:hidden z-10">
+                    <div className="absolute top-16 right-4 bg-white shadow-lg rounded-lg w-48 py-2 flex flex-col lg:hidden z-10">
                         <Link href={route("beranda")} className="px-4 py-2 hover:bg-gray-100">Beranda</Link>
                         <a href="#" className="px-4 py-2 hover:bg-gray-100">Tata Cara Pengaduan</a>
                         <Link href={route("status")} className="px-4 py-2 hover:bg-gray-100">Cek Status</Link>
