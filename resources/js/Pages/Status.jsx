@@ -1,13 +1,12 @@
-import Header from "@/components/Header";
-import Navbar from "@/components/Navbar";
+import LandingLayout from "@/Layouts/LandingLayout";
 import Cari from "@/Pages/Input/Cari";
 
 const Status = () => {
   return (
     <div>
-      <Header />
-      <Navbar />
+      <LandingLayout>
       <Cari />
+      </LandingLayout>
     </div>
   );
 };

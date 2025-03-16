@@ -28,6 +28,13 @@ class PenggunaAuthController extends Controller
             'user' => Auth::guard('penggunas')->user(),
         ]);
     }
+    public function status()
+    {
+        return Inertia::render('Status', [
+            'user' => Auth::guard('penggunas')->user(),
+        ]);
+    }
+
     /**
      * Proses login untuk pengguna.
      */
@@ -41,23 +48,26 @@ class PenggunaAuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('penggunas')->attempt($credentials)) {
-            return redirect()->intended('/');
+            session()->regenerate();
+            return redirect()->intended(route('beranda'));
         }
 
         return Inertia::render('Welcome', [
             'errors' => ['message' => 'Invalid credentials provided'],
-            'user' => Auth::guard('penggunas')->user(),
         ]);
     }
 
     /**
      * Proses logout untuk pengguna.
      */
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::guard('penggunas')->logout();
 
-        return redirect()->route('beranda')->with('success', 'Logout berhasil!');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
     /**

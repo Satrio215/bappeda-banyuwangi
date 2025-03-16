@@ -8,7 +8,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Route::get('/', function () {
+// Route::get('/qeqweqweq', function () {
 //     return Inertia::render('Welcome', [
 //         // 'canLogin' => Route::has('login'),
 //         // 'canRegister' => Route::has('register'),
@@ -18,10 +18,8 @@ use Inertia\Inertia;
 // })->name('beranda');
 
 Route::get('/', [PenggunaAuthController::class,'welcome'])->name('beranda');
+Route::get('/status', [PenggunaAuthController::class,'status'])->name('status');
 
-Route::get('/status', function () {
-    return Inertia::render('Status');
-})->name('status');
 
 Route::get('/register-pengguna', function () {
     return Inertia::render('Auth/RegisterPengguna');
@@ -32,14 +30,14 @@ Route::get('/login-pengguna', [PenggunaAuthController::class, 'showLoginForm'])-
 Route::post('/login-pengguna', [PenggunaAuthController::class, 'login']);
 Route::post('/logout-pengguna', [PenggunaAuthController::class, 'logout'])->name('pengguna.logout');
 
+// Inputs Routes
+Route::get('/inputs/create', [InputController::class, 'create'])->name('inputs.create');
+Route::post('/inputs', [InputController::class, 'store'])->name('inputs.store');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Inputs Routes
-Route::get('/inputs/create', [InputController::class, 'create'])->name('inputs.create');
-Route::post('/inputs', [InputController::class, 'store'])->name('inputs.store');
 
 Route::get('/cari-tiket', [InputController::class, 'show'])->name('cari.tiket');
 
