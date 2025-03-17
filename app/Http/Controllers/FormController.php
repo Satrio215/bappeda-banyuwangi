@@ -98,19 +98,40 @@ class FormController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'status' => 'required|string|in:proses,diterima,selesai',
-        ]);
+{
+    $request->validate([
+        'status' => 'required|string|in:proses,diterima,selesai',
+        'file_bukti' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+        'file_identitas' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+    ]);
 
-        $form = Form::findOrFail($id);
-        $form->update([
-            'status' => $request->status,
-        ]);
+    $form = Form::findOrFail($id);
 
-        return redirect()->route('forms.index')->with('success', 'Status berhasil diperbarui!');
+    if ($request->hasFile('file_bukti')) {
+        $oldFileBukti = public_path('images/' . $form->file_bukti);
+        if ($form->file_bukti && file_exists($oldFileBukti)) {
+            unlink($oldFileBukti);
+        }
+        $fileBuktiName = time() . '_bukti.' . $request->file('file_bukti')->getClientOriginalExtension();
+        $request->file('file_bukti')->move(public_path('images'), $fileBuktiName);
+        $form->file_bukti = $fileBuktiName;
     }
 
+    if ($request->hasFile('file_identitas')) {
+        $oldFileIdentitas = public_path('images/' . $form->file_identitas);
+        if ($form->file_identitas && file_exists($oldFileIdentitas)) {
+            unlink($oldFileIdentitas);
+        }
+        $fileIdentitasName = time() . '_identitas.' . $request->file('file_identitas')->getClientOriginalExtension();
+        $request->file('file_identitas')->move(public_path('images'), $fileIdentitasName);
+        $form->file_identitas = $fileIdentitasName;
+    }
+
+    $form->status = $request->status;
+    $form->save();
+
+    return redirect()->route('forms.index')->with('success', 'Form berhasil diperbarui!');
+}
     /**
      * Remove the specified resource from storage.
      */

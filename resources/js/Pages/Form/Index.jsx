@@ -44,6 +44,7 @@ export default function Index({ auth, forms }) {
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-50">
                                         <tr>
+                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Judul</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">No. Tiket</th>
                                             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Keterangan</th>
@@ -53,8 +54,9 @@ export default function Index({ auth, forms }) {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
-                                        {forms.map((form) => (
+                                        {forms.map((form, index) => (
                                             <tr key={form.id}>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{form.judul}</td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{form.no_tiket}</td>
 
