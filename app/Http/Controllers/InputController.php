@@ -21,7 +21,13 @@ class InputController extends Controller
      */
     public function create()
     {
-        return inertia('Input/Create');
+        if (!Auth::guard('penggunas')->check()) {
+            return redirect()->route('login.pengguna'); // Redirect ke halaman login
+        }
+
+        return Inertia::render('Input/Create', [
+            'email' => Auth::guard('penggunas')->user()->email,
+        ]);
     }
 
     /**

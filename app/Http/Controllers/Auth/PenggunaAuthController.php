@@ -16,22 +16,37 @@ class PenggunaAuthController extends Controller
      */
     public function showLoginForm()
     {
+        $user = Auth::guard('penggunas')->user();
         return Inertia::render('Auth/LoginPengguna', [
-            'user' => Auth::guard('penggunas')->user(),
-
+            'user' => $user,
+            'email' => $user ? $user->email : null,
         ]);
     }
 
     public function welcome()
     {
+        $user = Auth::guard('penggunas')->user();
         return Inertia::render('Welcome', [
-            'user' => Auth::guard('penggunas')->user(),
+            'user' => $user,
+            'email' => $user ? $user->email : null,
         ]);
     }
+
     public function status()
     {
+        $user = Auth::guard('penggunas')->user();
         return Inertia::render('Status', [
-            'user' => Auth::guard('penggunas')->user(),
+            'user' => $user,
+            'email' => $user ? $user->email : null,
+        ]);
+    }
+
+    public function create()
+    {
+        $user = Auth::guard('Input/Create')->user();
+        return Inertia::render('Status', [
+            'user' => $user,
+            'email' => $user ? $user->email : null,
         ]);
     }
 
@@ -74,11 +89,11 @@ class PenggunaAuthController extends Controller
      * Menampilkan dashboard pengguna.
      */
     public function dashboard()
-{
-    $pengguna = auth()->user();
-
-    return Inertia::render('Welcome', [
-        'user' => Auth::guard('penggunas')->user(),
-    ]);
-}
+    {
+        $user = Auth::guard('penggunas')->user();
+        return Inertia::render('Welcome', [
+            'user' => $user,
+            'email' => $user ? $user->email : null,
+        ]);
+    }
 }

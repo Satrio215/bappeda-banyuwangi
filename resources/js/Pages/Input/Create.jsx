@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "@inertiajs/react";
 import Swal from "sweetalert2";
 
-export default function Create() {
+export default function Create({ email }) {
     const { data, setData, post, reset, errors } = useForm({
         no_tiket: "",
         klasifikasi: "",
@@ -21,9 +21,13 @@ export default function Create() {
         provinsi: "",
         kota: "",
         no_telp: "",
-        email: "",
+        email: email || "",
         status: "",
     });
+
+    useEffect(() => {
+        setData("email", email || "");
+    }, [email]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -441,7 +445,7 @@ export default function Create() {
                                 type="email"
                                 className="md:col-span-2 w-full p-2 border border-[#097FF5] rounded-md shadow-md"
                                 value={data.email}
-                                onChange={(e) => setData("email", e.target.value)}
+                                readOnly
                             />
                         </div>
                         {errors.email && (

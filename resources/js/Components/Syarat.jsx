@@ -23,9 +23,12 @@ export default function Syarat() {
             <h2 className="text-xl font-semibold text-gray-800">Syarat & Ketentuan</h2>
             <ul className="list-decimal list-inside text-gray-700 space-y-2 mt-4">
               <li>Berkas yang diterima Komnas HAM RI merupakan dokumen negara sehingga tidak dapat dipinjam dan diminta kembali.</li>
-              <li>Pengadu wajib menjaga kerahasiaan nomor agenda, nomor kasus, dan informasi terkait aduan yang disampaikan.</li>
+              <li>Pengadu wajib menjaga kerahasiaan nomor agenda, nomor kasus, username & password akun, dan informasi terkait aduan yang disampaikan.</li>
               <li>Pengaduan ini disampaikan dengan itikad baik dan penuh kesungguhan.</li>
             </ul>
+            <div className="mt-4 p-3 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
+              <strong>Catatan:</strong> Jika ingin melakukan pengisian form pengaduan, diwajibkan untuk melakukan login terlebih dahulu. 
+            </div>
             <div className="flex items-center mt-4 space-x-2">
               <Checkbox checked={checked} onCheckedChange={setChecked} />
               <label className="text-gray-700">Saya setuju dengan Syarat & Ketentuan yang ada</label>

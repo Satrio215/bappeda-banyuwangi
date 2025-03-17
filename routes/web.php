@@ -8,17 +8,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-// Route::get('/qeqweqweq', function () {
-//     return Inertia::render('Welcome', [
-//         // 'canLogin' => Route::has('login'),
-//         // 'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// })->name('beranda');
-
 Route::get('/', [PenggunaAuthController::class,'welcome'])->name('beranda');
 Route::get('/status', [PenggunaAuthController::class,'status'])->name('status');
+Route::get('/create', [PenggunaAuthController::class,'create'])->name('create');
 
 
 Route::get('/register-pengguna', function () {
