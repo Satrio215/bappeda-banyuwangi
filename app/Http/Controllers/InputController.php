@@ -74,7 +74,7 @@ class InputController extends Controller
         $form->save();
 
         return redirect()->route('beranda')->with([
-            'success' => 'Form berhasil disimpan!',
+            'success' => 'Aduan baru berhasil dibuat dan akan segera dibuat',
             'no_tiket' => $form->no_tiket
         ]);
     }

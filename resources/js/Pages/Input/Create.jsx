@@ -34,12 +34,27 @@ export default function Create({ email }) {
 
         post(route("inputs.store"), {
             onSuccess: (page) => {
-                const successMessage = page.props.flash?.success || "Form berhasil disimpan!";
+                const successMessage = page.props.flash?.success || "Aduan baru berhasil dibuat dan akan segera dibuat";
                 const noTiket = page.props.flash?.no_tiket || "Tidak ada tiket yang dikembalikan.";
 
                 Swal.fire({
                     title: "Berhasil!",
-                    text: `${successMessage}\nNo Tiket: ${noTiket}`,
+                    html: `
+                    <br>
+                        ${successMessage}
+                        <div style="
+                            margin-top: 16px;
+                            padding: 12px;
+                            background-color: #FEF3C7;
+                            border-left: 4px solid #D97706;
+                            color: #92400E;
+                        ">
+                            <strong>Catatan:</strong> No Tiket harap disimpan.
+                        </div>
+                        <br>
+                        <strong>No Tiket:</strong> <br>
+                        ${noTiket}
+                    `,
                     icon: "success",
                     confirmButtonText: "OK",
                 });
