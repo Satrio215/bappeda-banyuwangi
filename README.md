@@ -18,7 +18,7 @@ Follow the steps below to set up the project:
 
 ```shell
 git clone https://github.com/Satrio215/bappeda-banyuwangi.git
-cd rsWeb
+cd bappeda-banyuwangi
 ```
 
 ### 2. Install npm and Composer
