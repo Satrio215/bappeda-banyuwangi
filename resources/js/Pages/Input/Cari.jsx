@@ -61,8 +61,8 @@ export default function Cari({ no_tiket, status }) {
           </form>
 
           {/* Menampilkan Status */}
-          <div className="mt-6 p-4 bg-white text-gray-800 rounded-lg shadow-md">
-            <p className="font-semibold">Status Pengaduan:</p>
+          <div className="mt-6 p-4 text-gray-800 rounded-lg shadow-md">
+            <p className="font-semibold lg:text-xl">Status Pengaduan:</p>
             <p className="text-lg font-bold text-[#097FF5]">{statusMessage}</p>
           </div>
         </div>

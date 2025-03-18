@@ -1,5 +1,7 @@
 import Navbar from "@/Components/Navbar";
 import Header from "@/Components/Header";
+import LiveChat from "@/Components/LiveChat";
+
 import React, { createContext, useContext } from "react";
 
 const GlobalContext = createContext();
@@ -13,6 +15,7 @@ const LandingLayout = ({ children, user }) => {
         <Header />
         <Navbar user={user} />
         <div>{children}</div>
+        <LiveChat />
       </div>
     </GlobalContext.Provider>
   );
