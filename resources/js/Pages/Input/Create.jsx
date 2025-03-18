@@ -247,7 +247,7 @@ export default function Create({ email }) {
                         )}
                         <div>
                             <label className="block font-saira font-light text-sm lg:text-lg pt-2 lg:pt-4 pb-2">
-                            maksimum 2Mb (JPEG, JPG, PNG, PDF, MP4, MPEG, 3GP, AVI, MP3, MAV, WMA)
+                            maksimum 2Mb (JPG , JPEG , PNG)
                             </label>
                         </div>
                     </div>
