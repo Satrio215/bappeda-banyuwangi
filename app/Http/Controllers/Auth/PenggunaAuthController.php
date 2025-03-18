@@ -38,17 +38,29 @@ class PenggunaAuthController extends Controller
         return Inertia::render('Status', [
             'user' => $user,
             'email' => $user ? $user->email : null,
+            'no_tiket' => session()->get('no_tiket'),
+            'status' => session()->get('status', 'Tiket tidak ditemukan'),
         ]);
     }
 
     public function create()
     {
         $user = Auth::guard('Input/Create')->user();
-        return Inertia::render('Status', [
+        return Inertia::render('Input/Create', [
             'user' => $user,
             'email' => $user ? $user->email : null,
         ]);
     }
+
+    public function landing()
+    {
+        $user = Auth::guard('Components/Landing')->user();
+        return Inertia::render('Components/Landing', [
+            'user' => $user,
+            'email' => $user ? $user->email : null,
+        ]);
+    }
+
 
     /**
      * Proses login untuk pengguna.

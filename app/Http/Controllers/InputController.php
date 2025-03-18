@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Form;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class InputController extends Controller
 {
@@ -22,7 +24,7 @@ class InputController extends Controller
     public function create()
     {
         if (!Auth::guard('penggunas')->check()) {
-            return redirect()->route('login.pengguna'); // Redirect ke halaman login
+            return redirect()->route('login.pengguna');
         }
 
         return Inertia::render('Input/Create', [
@@ -83,25 +85,22 @@ class InputController extends Controller
     public function show(Request $request)
     {
         $no_tiket = $request->input('no_tiket');
-        $no_telp = $request->input('no_telp');
         $status = 'Tiket tidak ditemukan';
 
-        if ($no_tiket && $no_telp) {
-            $form = Form::where('no_tiket', $no_tiket)
-                        ->where('no_telp', $no_telp)
-                        ->first();
+        if ($no_tiket) {
+            $form = Form::where('no_tiket', $no_tiket)->first();
 
             if ($form) {
                 $status = $form->status;
             }
         }
 
-        return inertia('Input/Cari', [
+        return redirect()->route('status')->with([
             'no_tiket' => $no_tiket,
-            'no_telp' => $no_telp,
             'status' => $status,
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

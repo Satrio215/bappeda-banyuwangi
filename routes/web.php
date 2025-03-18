@@ -11,6 +11,7 @@ use Inertia\Inertia;
 Route::get('/', [PenggunaAuthController::class,'welcome'])->name('beranda');
 Route::get('/status', [PenggunaAuthController::class,'status'])->name('status');
 Route::get('/create', [PenggunaAuthController::class,'create'])->name('create');
+Route::get('/landing', [PenggunaAuthController::class,'create'])->name('landing');
 
 
 Route::get('/register-pengguna', function () {
@@ -26,12 +27,15 @@ Route::post('/logout-pengguna', [PenggunaAuthController::class, 'logout'])->name
 Route::get('/inputs/create', [InputController::class, 'create'])->name('inputs.create');
 Route::post('/inputs', [InputController::class, 'store'])->name('inputs.store');
 
+// Cari Tiket
+Route::get('/cari-tiket', [InputController::class, 'show'])->name('cari.tiket');
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/cari-tiket', [InputController::class, 'show'])->name('cari.tiket');
 
 Route::middleware('auth')->group(function () {
     // Profile Routes

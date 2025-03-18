@@ -3,12 +3,12 @@ import Landing from "@/components/Landing";
 import Syarat from "@/components/Syarat";
 import Create from "@/Pages/Input/Create";
 
-const Welcome = ({ email }) => {
+const Welcome = ({ email, user }) => {
   return (
     <div>
       <LandingLayout>
       <Syarat />
-      <Landing />
+      <Landing user={user}/>
       {email && <Create email={email} />}
       </LandingLayout>
 

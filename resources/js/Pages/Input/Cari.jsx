@@ -1,23 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { router } from "@inertiajs/react";
 
-export default function Cari({ statusResponse }) {
-  const [ticketNumber, setTicketNumber] = useState("");
-  const [status, setStatus] = useState(statusResponse || null);
+export default function Cari({ no_tiket, status }) {
+  const [ticketNumber, setTicketNumber] = useState(no_tiket || "");
+  const [statusMessage, setStatusMessage] = useState(status || "Tiket tidak ditemukan");
+
+  useEffect(() => {
+    if (status) {
+      setStatusMessage(status);
+    }
+  }, [status]);
 
   const handleSearch = (e) => {
     e.preventDefault();
 
-    if (!ticketNumber) {
+    if (!ticketNumber.trim()) {
       alert("Harap isi No Tiket.");
       return;
     }
 
-    router.get(route("cari.tiket"), { no_tiket: ticketNumber }, {
-      onSuccess: (page) => {
-        setStatus(page.props.status);
-      },
-    });
+    router.get(route("cari.tiket"), { no_tiket: ticketNumber });
   };
 
   return (
@@ -46,7 +48,7 @@ export default function Cari({ statusResponse }) {
               placeholder="No Urut Tiket Pengadu"
               value={ticketNumber}
               onChange={(e) => setTicketNumber(e.target.value)}
-              className="bg-white text-gray-600 p-3 rounded-full w-full max-w-[100px] md:max-w-none flex-1 focus:outline-none font-saira"
+              className="bg-white text-gray-600 p-3 rounded-full w-full max-w-[200px] md:max-w-none flex-1 focus:outline-none font-saira text-center"
             />
 
             {/* Tombol Periksa */}
@@ -59,12 +61,10 @@ export default function Cari({ statusResponse }) {
           </form>
 
           {/* Menampilkan Status */}
-          {status && (
-            <div className="mt-6 p-4 bg-white text-gray-800 rounded-lg shadow-md">
-              <p className="font-semibold">Status Pengaduan:</p>
-              <p className="text-lg font-bold text-[#097FF5]">{status}</p>
-            </div>
-          )}
+          <div className="mt-6 p-4 bg-white text-gray-800 rounded-lg shadow-md">
+            <p className="font-semibold">Status Pengaduan:</p>
+            <p className="text-lg font-bold text-[#097FF5]">{statusMessage}</p>
+          </div>
         </div>
       </div>
     </div>
