@@ -393,48 +393,61 @@ export default function Create({ email }) {
                             </div>
                         )}
 
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
-    <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
-        Unggah Identitas Pelapor *
-    </label>
-    <div className="flex items-center border-2 border-[#097FF5] rounded-lg overflow-hidden shadow-md">
-        <label className="bg-[#097FF5] text-white px-6 lg:px-12 py-2 h-full font-semibold cursor-pointer whitespace-nowrap">
-            Pilih File...
-            <input
-                type="file"
-                className="hidden"
-                onChange={(e) => {
-                    const file = e.target.files[0];
-                    if (!file) return;
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
+                            <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
+                                Unggah Identitas Pelapor *
+                            </label>
+                            <div className="flex items-center border-2 border-[#097FF5] rounded-lg overflow-hidden shadow-md">
+                                <label className="bg-[#097FF5] text-white px-6 lg:px-12 py-2 h-full font-semibold cursor-pointer whitespace-nowrap">
+                                    Pilih File...
+                                    <input
+                                        type="file"
+                                        className="hidden"
+                                        onChange={(e) => {
+                                            const file = e.target.files[0];
+                                            if (!file) return;
 
-                    // Validasi ukuran maksimal 2MB
-                    if (file.size > 2 * 1024 * 1024) {
-                        alert("Ukuran file terlalu besar! Maksimal 2MB.");
-                        return;
-                    }
+                                            // Validasi ukuran maksimal 2MB
+                                            if (file.size > 2 * 1024 * 1024) {
+                                                alert(
+                                                    "Ukuran file terlalu besar! Maksimal 2MB."
+                                                );
+                                                return;
+                                            }
 
-                    // Validasi format file
-                    const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
-                    if (!allowedTypes.includes(file.type)) {
-                        alert("Format file tidak didukung! Harap unggah file JPG atau PNG.");
-                        return;
-                    }
+                                            // Validasi format file
+                                            const allowedTypes = [
+                                                "image/jpeg",
+                                                "image/png",
+                                                "image/jpg",
+                                            ];
+                                            if (
+                                                !allowedTypes.includes(
+                                                    file.type
+                                                )
+                                            ) {
+                                                alert(
+                                                    "Format file tidak didukung! Harap unggah file JPG atau PNG."
+                                                );
+                                                return;
+                                            }
 
-                    setData("file_identitas", file);
-                }}
-            />
-        </label>
-        <span className="px-4 py-2 text-gray-600 w-full truncate">
-            {data.file_identitas ? data.file_identitas.name : "Belum ada file dipilih"}
-        </span>
-    </div>
-</div>
-{errors.file_identitas && (
-    <div className="text-red-500 text-sm mt-1">
-        {errors.file_identitas}
-    </div>
-)}
-
+                                            setData("file_identitas", file);
+                                        }}
+                                    />
+                                </label>
+                                <span className="px-4 py-2 text-gray-600 w-full truncate">
+                                    {data.file_identitas
+                                        ? data.file_identitas.name
+                                        : "Belum ada file dipilih"}
+                                </span>
+                            </div>
+                        </div>
+                        {errors.file_identitas && (
+                            <div className="text-red-500 text-sm mt-1">
+                                {errors.file_identitas}
+                            </div>
+                        )}
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center mb-2">
                             <label className="block font-saira font-medium text-md lg:text-2xl pt-2 lg:pt-4">
