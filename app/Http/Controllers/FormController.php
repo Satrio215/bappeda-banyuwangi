@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Form;
+use App\Models\Kejadian;
+use App\Models\Data;
+use App\Models\Klasifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {

@@ -4,31 +4,60 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Form extends Model
 {
     use HasFactory;
 
     protected $table = 'forms';
+
     protected $fillable = [
-        'no_tiket', 'klasifikasi', 'judul', 'uraian', 'tanggal',
-        'lokasi', 'keterangan', 'file_bukti', 'nama', 'sex',
-        'identitas', 'nomor', 'file_identitas', 'alamat', 'provinsi',
-        'kota', 'no_telp', 'email', 'status'
+        'id_users',
+        'id_penggunas',
+        'id_kejadians',
+        'id_datas',
+        'id_klasifikasis',
+        'no_tiket',
+        'status',
     ];
 
-    protected static function boot()
+    /**
+     * Relasi ke User (pelapor)
+     */
+    public function user()
     {
-        parent::boot();
+        return $this->belongsTo(User::class, 'id_users');
+    }
 
-        static::creating(function ($form) {
-            $randomStr = strtoupper(Str::uuid());
-            $form->no_tiket = 'TKT-' . now()->format('Ymd') . '-' . substr($randomStr, 0, 8);
+    /**
+     * Relasi ke Pengguna (yang mengisi laporan)
+     */
+    public function pengguna()
+    {
+        return $this->belongsTo(Pengguna::class, 'id_penggunas');
+    }
 
-            if (empty($form->status)) {
-                $form->status = 'proses';
-            }
-        });
+    /**
+     * Relasi ke Kejadian
+     */
+    public function kejadian()
+    {
+        return $this->belongsTo(Kejadian::class, 'id_kejadians');
+    }
+
+    /**
+     * Relasi ke Data Pelapor
+     */
+    public function data()
+    {
+        return $this->belongsTo(Data::class, 'id_datas');
+    }
+
+    /**
+     * Relasi ke Klasifikasi
+     */
+    public function klasifikasi()
+    {
+        return $this->belongsTo(Klasifikasi::class, 'id_klasifikasis');
     }
 }

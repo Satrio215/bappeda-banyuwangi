@@ -11,16 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('forms', function (Blueprint $table) {
+        Schema::create('datas', function (Blueprint $table) {
             $table->id();
-            $table->string('no_tiket');
-            $table->enum('klasifikasi',['infrastruktur', 'lingkungan', 'desa', 'pembangunan', 'umkm']);
-            $table->string('judul');
-            $table->string('uraian');
-            $table->date('tanggal');
-            $table->string('lokasi');
-            $table->string('keterangan');
-            $table->string('file_bukti');
             $table->string('nama');
             $table->enum('sex',['pria','wanita'])->nullable();
             $table->enum('identitas',['ktp','sim']);
@@ -31,7 +23,6 @@ return new class extends Migration
             $table->string('kota')->nullable();
             $table->string('no_telp')->nullable();
             $table->string('email');
-            $table->enum('status',['diterima', 'proses', 'selesai']);
             $table->timestamps();
         });
     }
@@ -41,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('forms');
+        Schema::dropIfExists('datas');
     }
 };

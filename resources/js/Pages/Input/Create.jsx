@@ -4,8 +4,7 @@ import Swal from "sweetalert2";
 
 export default function Create({ email }) {
     const { data, setData, post, reset, errors } = useForm({
-        no_tiket: "",
-        klasifikasi: "",
+        tipe: "",
         judul: "",
         uraian: "",
         tanggal: "",
@@ -13,7 +12,7 @@ export default function Create({ email }) {
         keterangan: "",
         file_bukti: null,
         nama: "",
-        sex: null,
+        sex: "",
         identitas: "",
         nomor: "",
         file_identitas: null,
@@ -22,7 +21,7 @@ export default function Create({ email }) {
         kota: "",
         no_telp: "",
         email: email || "",
-        status: "",
+        status: "diterima",
     });
 
     useEffect(() => {
@@ -89,44 +88,57 @@ export default function Create({ email }) {
                 <form onSubmit={handleSubmit}>
                     {/* Pilih Klasifikasi */}
                     <div className="sm:px-10 lg:px-14">
-                        <div className="border px-4 lg:px-10 py-8 lg:py-10 rounded-lg shadow-xl ">
+                        {/* Pilih Klasifikasi Pengaduan */}
+                        <div className="border px-4 lg:px-10 py-8 lg:py-10 rounded-lg shadow-xl">
                             <label className="block font-saira text-[#097FF5] font-bold text-xl lg:text-3xl pb-4">
                                 Pilih Klasifikasi Pengaduan
                             </label>
                             <div className="grid grid-cols-2 gap-2 mt-2">
                                 {[
-                                    "Infrastruktur",
-                                    "Lingkungan",
-                                    "Pembangunan",
-                                    "Desa",
-                                    "UMKM",
+                                    { value: "be", label: "Bidang Ekonomi" },
+                                    {
+                                        value: "bpp",
+                                        label: "Bidang Perencanaan dan Pembangunan",
+                                    },
+                                    {
+                                        value: "bkrp",
+                                        label: "Bidang Kesejahteraan Rakyat dan Pemerintah",
+                                    },
+                                    {
+                                        value: "bspl",
+                                        label: "Bidang Sarana dan Prasarana Wilayah dan Lingkungan",
+                                    },
+                                    {
+                                        value: "bppp",
+                                        label: "Bidang Penelitian, Pengembangan, dan Pengendalian Evaluasi",
+                                    },
                                 ].map((item) => (
                                     <button
                                         type="button"
-                                        key={item}
+                                        key={item.value}
                                         className={`flex items-center py-2 px-4 border rounded-md outline-dotted text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-saira font-bold w-full truncate
-                                        ${
-                                            data.klasifikasi === item
-                                                ? "bg-[#FF9D00] text-white border-[#FF9D00]"
-                                                : "bg-white border-gray-300 text-[#097FF5]"
-                                        }`}
+                    ${
+                        data.tipe === item.value
+                            ? "bg-[#FF9D00] text-white border-[#FF9D00]"
+                            : "bg-white border-gray-300 text-[#097FF5]"
+                    }`}
                                         onClick={() =>
-                                            setData("klasifikasi", item)
+                                            setData("tipe", item.value)
                                         }
                                     >
                                         <input
                                             type="checkbox"
                                             className="mr-2 accent-orange-500 rounded-full"
-                                            checked={data.klasifikasi === item}
+                                            checked={data.tipe === item.value}
                                             readOnly
                                         />
-                                        {item}
+                                        {item.label}
                                     </button>
                                 ))}
                             </div>
-                            {errors.klasifikasi && (
+                            {errors.tipe && (
                                 <div className="text-red-500 text-sm mt-2">
-                                    {errors.klasifikasi}
+                                    {errors.tipe}
                                 </div>
                             )}
                         </div>
@@ -207,8 +219,6 @@ export default function Create({ email }) {
                             </div>
                         )}
                     </div>
-
-                    {/* Unggah Bukti */}
                     {/* Unggah Bukti */}
                     <div className="mt-4 p-4 rounded-lg outline-dashed outline-[#097FF5] shadow-sm pt-4">
                         <label className="block font-saira text-[#097FF5] font-bold text-xl lg:text-3xl">
@@ -245,7 +255,6 @@ export default function Create({ email }) {
                                     className="hidden"
                                     onChange={(e) => {
                                         const file = e.target.files[0];
-
                                         if (!file) return;
 
                                         if (file.size > 2 * 1024 * 1024) {
@@ -255,7 +264,6 @@ export default function Create({ email }) {
                                             return;
                                         }
 
-                                        // Validasi format file
                                         const allowedTypes = [
                                             "image/jpeg",
                                             "image/png",
@@ -364,8 +372,8 @@ export default function Create({ email }) {
                                 }
                             >
                                 <option value="">Pilih Tipe Identitas</option>
-                                <option value="SIM">SIM</option>
-                                <option value="KTP">KTP</option>
+                                <option value="sim">SIM</option>
+                                <option value="ktp">KTP</option>
                             </select>
                         </div>
                         {errors.identitas && (
@@ -407,7 +415,6 @@ export default function Create({ email }) {
                                             const file = e.target.files[0];
                                             if (!file) return;
 
-                                            // Validasi ukuran maksimal 2MB
                                             if (file.size > 2 * 1024 * 1024) {
                                                 alert(
                                                     "Ukuran file terlalu besar! Maksimal 2MB."
@@ -415,7 +422,6 @@ export default function Create({ email }) {
                                                 return;
                                             }
 
-                                            // Validasi format file
                                             const allowedTypes = [
                                                 "image/jpeg",
                                                 "image/png",
