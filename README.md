@@ -37,7 +37,7 @@ cp .env.example .env
 ### 4. Migrate tables to the database
 
 ```shell
-php artisan migrate:fresh
+php artisan migrate:fresh --seed
 ```
 
 ### 5. Run the application
