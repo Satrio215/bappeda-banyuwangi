@@ -125,7 +125,7 @@ class InputController extends Controller
                 'id_klasifikasis' => $klasifikasi->id,
                 'id_datas' => $data->id,
                 'no_tiket' => $noTiket,
-                'status' => 'diterima',
+                'status' => 'proses',
                 'tipe' => $validated['tipe'],
             ]);
 
@@ -145,20 +145,22 @@ return redirect()->route('beranda')->with([
      * Menampilkan status tiket berdasarkan no_tiket.
      */
     public function show(Request $request)
-    {
-        $no_tiket = $request->input('no_tiket');
-        $status = 'Tiket tidak ditemukan';
+{
+    $no_tiket = $request->input('no_tiket');
 
-        if ($no_tiket) {
-            $form = Form::where('no_tiket', $no_tiket)->first();
-            if ($form) {
-                $status = $form->status;
-            }
-        }
+    // Hanya lakukan pencarian jika no_tiket diisi
+    if ($no_tiket) {
+        $form = Form::where('no_tiket', $no_tiket)->first();
+        $status = $form ? $form->status : 'Tiket tidak ditemukan';
 
         return redirect()->route('status')->with([
             'no_tiket' => $no_tiket,
             'status' => $status,
         ]);
     }
+
+    // Jika tidak ada input tiket, redirect tanpa kirim status apa pun
+    return redirect()->route('status');
+}
+
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('id_datas')->constrained('datas')->onDelete('cascade');
             $table->foreignId('id_klasifikasis')->constrained('klasifikasis')->onDelete('cascade');
             $table->string('no_tiket');
-            $table->enum('status', ['diterima', 'proses', 'selesai']);
+            $table->enum('status', ['gagal','diterima', 'proses', 'selesai']);
             $table->timestamps();
         });
     }

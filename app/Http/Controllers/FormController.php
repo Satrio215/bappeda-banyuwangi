@@ -92,7 +92,7 @@ class FormController extends Controller
         count($request->except('_method')) === 1
     ) {
         $validated = $request->validate([
-            'status' => 'required|string|in:diterima,proses,selesai',
+            'status' => 'required|string|in:gagal,diterima,proses,selesai',
         ]);
 
         $form->status = $validated['status'];
@@ -121,7 +121,7 @@ class FormController extends Controller
         'kejadian.keterangan' => 'required|string',
 
         'tipe' => 'required|in:be,bpp,bkrp,bspl,bppp',
-        'status' => 'required|string|in:diterima,proses,selesai',
+        'status' => 'required|string|in:gagal,diterima,proses,selesai',
     ]);
 
     DB::beginTransaction();

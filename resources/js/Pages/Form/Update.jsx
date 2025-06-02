@@ -136,6 +136,7 @@ export default function Edit({ auth, form }) {
                                         }
                                     >
                                         <option value="">Pilih Status</option>
+                                        <option value="gagal">Gagal</option>
                                         <option value="diterima">
                                             Diterima
                                         </option>

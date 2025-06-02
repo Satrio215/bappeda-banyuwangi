@@ -77,7 +77,7 @@ export default function Create({ email }) {
     };
 
     return (
-        <div id="create-section" className="px-2 md:px-8 xl:px-16">
+        <div id="create-section" className="px-2 md:px-8 xl:px-16 pb-8">
             <div className="flex justify-center items-center mx-auto bg-[#097FF5] p-6 rounded-t-[50px] lg:rounded-t-[70px] border-4 border-[#097FF5] px-6 shadow-[4px_8px_20px_-5px_gray]">
                 <label className="text-xl lg:text-3xl font-bold font-saira text-center text-white">
                     Formulir Layanan Pengaduan
