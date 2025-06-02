@@ -20,7 +20,8 @@ export default function LoginPengguna() {
                 </h1>
                 <div className="border w-1/4 h-2 bg-white rounded-md" />
                 <p className="text-center max-w-md text-sm md:text-base font-saira pt-4">
-                    "Masuk ke akun Anda untuk melaporkan masalah dan meningkatkan kualitas layanan di Kabupaten Banyuwangi."
+                    "Masuk ke akun Anda untuk melaporkan masalah dan
+                    meningkatkan kualitas layanan di Kabupaten Banyuwangi."
                 </p>
             </div>
 
@@ -30,31 +31,73 @@ export default function LoginPengguna() {
                     <h2 className="text-2xl lg:text-4xl font-extrabold font-saira text-center text-[#097FF5] mb-6">
                         Login
                     </h2>
-                    <form onSubmit={handleSubmit} className="flex flex-col items-center">
+
+                    {/* Error login umum */}
+                    {errors.email === "Email atau password salah." && (
+                        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4 text-sm text-center">
+                            {errors.email}
+                        </div>
+                    )}
+
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col items-center"
+                    >
+                        {/* Input Field */}
                         {[
-                            { label: "Email", type: "email", name: "email", placeholder: "Masukkan email" },
-                            { label: "Password", type: "password", name: "password", placeholder: "Masukkan password" },
+                            {
+                                label: "Email",
+                                type: "email",
+                                name: "email",
+                                placeholder: "Masukkan email",
+                            },
+                            {
+                                label: "Password",
+                                type: "password",
+                                name: "password",
+                                placeholder: "Masukkan password",
+                            },
                         ].map((field) => (
                             <div className="mb-4 w-full" key={field.name}>
-                                <label className="block font-semibold font-saira text-[#097FF5] text-md lg:text-xl">
+                                <label
+                                    htmlFor={field.name}
+                                    className="block font-semibold font-saira text-[#097FF5] text-md lg:text-xl"
+                                >
                                     {field.label}
                                 </label>
                                 <input
+                                    id={field.name}
                                     type={field.type}
-                                    className="w-full p-3 border-l-8 border-[#097FF5] focus:outline-none focus:ring-2 focus:ring-[#097FF5]"
+                                    name={field.name}
                                     value={data[field.name]}
-                                    onChange={(e) => setData(field.name, e.target.value)}
+                                    onChange={(e) =>
+                                        setData(field.name, e.target.value)
+                                    }
                                     placeholder={field.placeholder}
+                                    className={`w-full p-3 border-l-8 rounded focus:outline-none focus:ring-2 ${
+                                        errors[field.name] &&
+                                        errors[field.name] !==
+                                            "Email atau password salah."
+                                            ? "border-red-500 focus:ring-red-500"
+                                            : "border-[#097FF5] focus:ring-[#097FF5]"
+                                    }`}
                                 />
-                                {errors[field.name] && <p className="text-red-500 text-sm mt-1">{errors[field.name]}</p>}
+                                {/* Pesan error validasi */}
+                                {errors[field.name] &&
+                                    errors[field.name] !==
+                                        "Email atau password salah." && (
+                                        <p className="text-sm text-red-500 mt-1">
+                                            {errors[field.name]}
+                                        </p>
+                                    )}
                             </div>
                         ))}
 
-                        {/* Submit Button */}
+                        {/* Tombol Submit */}
                         <button
                             type="submit"
-                            className="w-3/4 bg-[#097FF5] text-white py-3 pt-4 rounded-full hover:bg-blue-700 transition duration-300 disabled:opacity-50 text-center"
                             disabled={processing}
+                            className="w-3/4 bg-[#097FF5] text-white py-3 rounded-full hover:bg-blue-700 transition duration-300 disabled:opacity-50"
                         >
                             {processing ? "Memproses..." : "Login"}
                         </button>

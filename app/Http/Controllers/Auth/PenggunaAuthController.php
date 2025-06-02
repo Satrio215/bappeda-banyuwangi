@@ -66,23 +66,24 @@ class PenggunaAuthController extends Controller
      * Proses login untuk pengguna.
      */
     public function login(Request $request)
-    {
-        $validated = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
+{
+    $validated = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|string|min:6',
+    ]);
 
-        $credentials = $request->only('email', 'password');
+    $credentials = $request->only('email', 'password');
 
-        if (Auth::guard('penggunas')->attempt($credentials)) {
-            session()->regenerate();
-            return redirect()->intended(route('beranda'));
-        }
-
-        return Inertia::render('Welcome', [
-            'errors' => ['message' => 'Invalid credentials provided'],
-        ]);
+    if (Auth::guard('penggunas')->attempt($credentials)) {
+        $request->session()->regenerate();
+        return redirect()->intended(route('beranda'));
     }
+
+    // Kirim pesan error ke form input `email` secara konsisten
+    return back()->withErrors([
+        'email' => 'Email atau password salah.',
+    ])->withInput();
+}
 
     /**
      * Proses logout untuk pengguna.
