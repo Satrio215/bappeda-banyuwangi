@@ -30,6 +30,10 @@ Route::post('/inputs', [InputController::class, 'store'])->name('inputs.store');
 // Cari Tiket
 Route::get('/cari-tiket', [InputController::class, 'show'])->name('cari.tiket');
 
+Route::get('/tata-cara', function () {
+    return Inertia::render('Cara');
+})->name('cara');
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

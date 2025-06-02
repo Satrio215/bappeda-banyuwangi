@@ -1,11 +1,11 @@
 import LandingLayout from "@/Layouts/LandingLayout";
-import Cari from "@/Pages/Input/Cari";
+import Tata from "@/components/Tata";
 
-const Status = ({ no_tiket, status, user }) => {
+const Status = ({}) => {
     return (
         <div>
             <LandingLayout>
-                <Cari no_tiket={no_tiket} status={status} user={user} />
+                <Tata />
             </LandingLayout>
         </div>
     );
