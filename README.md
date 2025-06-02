@@ -32,7 +32,11 @@ composer i
 
 ```shell
 cp .env.example .env
+
 ```
+
+### Note. Setting env sesuai mysql
+
 
 ### 4. Migrate tables to the database
 
