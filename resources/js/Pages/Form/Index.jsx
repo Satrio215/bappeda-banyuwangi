@@ -6,7 +6,7 @@ export default function Index({ auth, forms }) {
 
     const handleDelete = (id) => {
         if (confirm("Apakah Anda yakin ingin menghapus form ini?")) {
-            destroy(route("forms.destroy", id));
+            destroy(route("forms.delete", id));
         }
     };
 
@@ -117,14 +117,17 @@ export default function Index({ auth, forms }) {
                                                     >
                                                         Edit
                                                     </Link>
-                                                    {/*
+
                                                     <button
-                                                        onClick={() => handleDelete(form.id)}
+                                                        onClick={() =>
+                                                            handleDelete(
+                                                                form.id
+                                                            )
+                                                        }
                                                         className="border border-red-500 text-red-500 px-3 py-1 rounded-lg hover:bg-red-500 hover:text-white"
                                                     >
                                                         Hapus
                                                     </button>
-                                                    */}
                                                 </td>
                                             </tr>
                                         ))}
