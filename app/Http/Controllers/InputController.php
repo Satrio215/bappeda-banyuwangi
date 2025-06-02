@@ -131,7 +131,10 @@ class InputController extends Controller
 
             DB::commit();
 
-            return redirect()->route('beranda')->with('success', 'Laporan berhasil dikirim.');
+return redirect()->route('beranda')->with([
+    'success' => 'Laporan berhasil dikirim.',
+    'no_tiket' => $noTiket,
+]);
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors(['message' => $e->getMessage()])->withInput();

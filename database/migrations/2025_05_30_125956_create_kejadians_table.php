@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('kejadians', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->string('uraian');
+            $table->text('uraian');
             $table->date('tanggal');
             $table->string('lokasi');
             $table->string('keterangan');
