@@ -31,7 +31,7 @@ composer i
 
 ```shell
 cp .env.example .env
-
+php artisan key:generate
 ```
 
 ### Note. Setting env sesuai mysql
